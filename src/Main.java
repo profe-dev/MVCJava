@@ -1,3 +1,7 @@
+import controlador.ContactoControlador;
+import modelo.ContactoModelo;
+import vista.ContactoVista;
+
 public class Main {
     public static void main(String[] args) {
         //Crear el modelo, la vista y el controlador
