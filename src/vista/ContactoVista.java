@@ -1,4 +1,10 @@
+package vista;
+
+import modelo.Contacto;
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -105,13 +111,19 @@ public class ContactoVista {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         //Listener para la tabla
-        contactosTable.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting() && contactosTable.getSelectedRow() != -1) {
-                int selectedRow = contactosTable.getSelectedRow();
-                idField.setText(contactosTable.getValueAt(selectedRow, 0).toString());
-                nombreField.setText(contactosTable.getValueAt(selectedRow, 1).toString());
-                telefonoField.setText(contactosTable.getValueAt(selectedRow, 2).toString());
-                emailField.setText(contactosTable.getValueAt(selectedRow, 3).toString());
+        contactosTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            /*Se agrega un ListSelectionListener al modelo de seleccion de la tabla contactosTable.
+            Esto significa que el cÃ³digo dentro del valueChanged se ejecutara cada vez que cambie la seleccion en la tabla.*/
+            @Override
+            public void valueChanged(ListSelectionEvent e) {//metodo que se ejecuta cuendo cambia la seleccion de la tabla
+                // Verifica si la seleccion no esta cambiando y si hay una fila seleccionada en la tabla.
+                if (!e.getValueIsAdjusting() && contactosTable.getSelectedRow() != -1) {//se utiliza para verificar si ha ocurrido un evento de selecciÃ³n vÃ¡lida en una tabla
+                int selectedRow = contactosTable.getSelectedRow();//Obtiene el Ã­ndice de la fila seleccionada en la tabla.
+                idField.setText(contactosTable.getValueAt(selectedRow, 0).toString());//Obtiene el valor de la columna 0 (ID) de la fila seleccionada y lo establece en el campo de texto idField.
+                nombreField.setText(contactosTable.getValueAt(selectedRow, 1).toString());//Obtiene el valor de la columna 1 (Nombre) de la fila seleccionada y lo establece en el campo de texto nombreField.
+                telefonoField.setText(contactosTable.getValueAt(selectedRow, 2).toString());//Obtiene el valor de la columna 2 (TelÃ©fono) de la fila seleccionada y lo establece en el campo de texto telefonoField.
+                emailField.setText(contactosTable.getValueAt(selectedRow, 3).toString());// Obtiene el valor de la columna 3 (Email) de la fila seleccionada y lo establece en el campo de texto emailField.
+                }
             }
         });
 

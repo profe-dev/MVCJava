@@ -1,3 +1,8 @@
+package controlador;
+
+import modelo.ContactoModelo;
+import vista.ContactoVista;
+
 public class ContactoControlador {
     private ContactoModelo modelo;
     private ContactoVista vista;
@@ -19,6 +24,7 @@ public class ContactoControlador {
         String email = vista.getEmailField().getText();
         modelo.agregarContacto(nombre, telefono, email);
         listarContactos();
+        vista.limpiarFormulario();
     }
 
     private void actualizarContacto() {
@@ -35,6 +41,7 @@ public class ContactoControlador {
         int id = Integer.parseInt(vista.getIdField().getText());
         modelo.eliminarContacto(id);
         listarContactos();
+        vista.limpiarFormulario();
     }
 
     private void listarContactos() {
